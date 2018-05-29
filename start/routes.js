@@ -19,4 +19,6 @@ Route.get('/', ({ request }) => {
   return { greeting: 'Hello world in JSON' }
 })
 
+// User
 Route.post('users', 'UserController.store')
+

@@ -1,15 +1,23 @@
 'use strict'
 
+const User = use('App/Models/User')
+
 class UserController {
-  async index () {
-  }
-
-  async create () {
-  }
-
+  /**
+   * store a new user if that user does not already exist
+   * @param {Object} Context (destructure request and response)
+   */
   async store ({request, response}) {
-    console.log('==============REQ============', request.body)
-    console.log('==============RES============', response)
+    const { body } = request
+
+    const user = await User.findOrCreate(body)
+    const { $attributes: { username, email } } = user
+
+    return response.json({
+      success: true,
+      username,
+      email
+    })
   }
 
   async show () {
