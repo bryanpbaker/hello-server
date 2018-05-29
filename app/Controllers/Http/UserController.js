@@ -8,7 +8,8 @@ class UserController {
   }
 
   async store ({request, response}) {
-
+    console.log('==============REQ============', request.body)
+    console.log('==============RES============', response)
   }
 
   async show () {

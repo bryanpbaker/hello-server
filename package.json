@@ -5,13 +5,10 @@
   "description": "Adonisjs boilerplate for API server with pre-configured JWT",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "adonis serve --dev",
     "test": "node ace test"
   },
-  "keywords": [
-    "adonisjs",
-    "adonis-app"
-  ],
+  "keywords": ["adonisjs", "adonis-app"],
   "author": "",
   "license": "UNLICENSED",
   "private": true,
