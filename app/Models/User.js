@@ -16,6 +16,10 @@ class User extends Model {
     this.addHook('beforeCreate', 'User.hashPassword')
   }
 
+  conversations() {
+    this.belongsToMany('App/Models/Conversation')
+  }
+
   /**
    * A relationship on tokens is required for auth to
    * work. Since features like `refreshTokens` or
@@ -26,8 +30,12 @@ class User extends Model {
    *
    * @return {Object}
    */
-  tokens () {
+  tokens() {
     return this.hasMany('App/Models/Token')
+  }
+
+  messages() {
+    return this.hasMany('App/Models/Message')
   }
 }
 
