@@ -1,5 +1,7 @@
 'use strict'
 
+const ConversationUser = use('App/Models/Conversationuser')
+
 class ConversationController {
   async index () {
   }
@@ -7,7 +9,10 @@ class ConversationController {
   async create () {
   }
 
-  async store () {
+  async store ({ request, response }) {
+    const { body } = request
+
+    console.log(body)
   }
 
   async show () {

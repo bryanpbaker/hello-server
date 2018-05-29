@@ -7,7 +7,10 @@ class MessageController {
   async create () {
   }
 
-  async store () {
+  async store ({ request, response }) {
+    const { body } = request
+
+    console.log(request)
   }
 
   async show () {

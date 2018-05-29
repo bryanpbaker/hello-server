@@ -22,3 +22,8 @@ Route.get('/', ({ request }) => {
 // User
 Route.post('users', 'UserController.store')
 
+// Conversation
+Route.post('conversations', 'ConversationController.store')
+
+// Message
+Route.post('messages', 'MessageController.store')
