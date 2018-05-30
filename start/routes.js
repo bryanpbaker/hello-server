@@ -30,4 +30,6 @@ Route.post('login', 'UserController.login')
 Route.post('conversations', 'ConversationController.store')
 
 // Message
-Route.post('messages', 'MessageController.store')
+Route
+  .post('messages', 'MessageController.store')
+  .middleware('auth')

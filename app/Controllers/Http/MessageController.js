@@ -1,5 +1,7 @@
 'use strict'
 
+const Message = use('App/Models/Message')
+
 class MessageController {
   async index () {
   }
@@ -7,10 +9,17 @@ class MessageController {
   async create () {
   }
 
-  async store ({ request, response }) {
-    const { body } = request
+  async store ({ request, response, auth }) {
+    const { receipient, body } = request.all()
+    const userId = auth.user.id
 
-    console.log(request)
+    const message = await Message.create({
+      user_id: userId,
+      conversation_id: 1,
+      body
+    })
+
+    return message
   }
 
   async show () {
