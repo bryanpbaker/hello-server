@@ -20,7 +20,11 @@ Route.get('/', ({ request }) => {
 })
 
 // User
+Route
+  .get('users/:id', 'UserController.show')
+  .middleware('auth')
 Route.post('users', 'UserController.store')
+Route.post('login', 'UserController.login')
 
 // Conversation
 Route.post('conversations', 'ConversationController.store')
