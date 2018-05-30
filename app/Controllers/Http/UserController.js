@@ -8,15 +8,9 @@ class UserController {
    * return existing user if it the user does exist
    * @param {Object} Context (destructure request and response)
    */
-  async store ({request, response}) {
+  async store ({ request }) {
     const { body } = request
-
-    const user = await User.findOrCreate(
-      { email: body.email },
-      {
-        body
-      }
-    )
+    const user = await User.findOrCreate({ email: body.email }, body)
     const { $attributes: { username, email } } = user
 
     return {
@@ -32,7 +26,6 @@ class UserController {
    */
   async login ({ request, auth }) {
     const { email, password } = request.all()
-
     const { type, token } = await auth.attempt(email, password)
 
     return {
@@ -54,10 +47,33 @@ class UserController {
     return auth.user
   }
 
-  async update () {
+  /**
+   * find a user by id and update that user
+   * @param {Object} Context
+   */
+  async update ({ request }) {
+    const { body, params: { id } } = request
+    const user = await User.find(id)
+
+    user.username = body.username
+    user.email = body.email
+    user.password = body.password
+
+    user.save()
+
+    return `The user with the id: ${user.id} has been updated.`
   }
 
-  async destroy () {
+  /**
+   * find a user with the given id and delete
+   * @param {Object} Context
+   */
+  async destroy ({ request }) {
+    const { params: { id } } = request
+    const user = await User.find(id)
+    await user.delete()
+
+    return `The user with the id: ${id} has been deleted.`
   }
 }
 

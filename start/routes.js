@@ -15,21 +15,17 @@
 
 const Route = use('Route')
 
-Route.get('/', ({ request }) => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.get('/', ({ request }) => ({ greeting: 'Hello world in JSON' }))
 
 // User
-Route
-  .get('users/:id', 'UserController.show')
-  .middleware('auth')
 Route.post('users', 'UserController.store')
 Route.post('login', 'UserController.login')
+Route.get('users/:id', 'UserController.show').middleware('auth')
+Route.patch('users/:id', 'UserController.update').middleware('auth')
+Route.delete('users/:id', 'UserController.destroy').middleware('auth')
 
 // Conversation
 Route.post('conversations', 'ConversationController.store')
 
 // Message
-Route
-  .post('messages', 'MessageController.store')
-  .middleware('auth')
+Route.post('messages', 'MessageController.store').middleware('auth')

@@ -1,5 +1,6 @@
 'use strict'
 
+const Conversation = use('App/Models/Conversation')
 const Message = use('App/Models/Message')
 
 class MessageController {
@@ -10,20 +11,16 @@ class MessageController {
   }
 
   async store ({ request, response, auth }) {
-    const { receipient, body } = request.all()
+    const data = request.all()
     const userId = auth.user.id
 
-    // TODO: create a new conversation here, if there isn't
-    // already one existing between these two users
-
-    const message = await Message.create({
+    // TODO - findOrCreate conversation between sender and recipient
+    const conversation = await Conversation.find(2)
+    const messages = await conversation.messages().create({
       user_id: userId,
-      // pass in the conversation id here
-      conversation_id: 1,
-      body
+      conversation_id: conversation.id,
+      body: data.body
     })
-
-    return message
   }
 
   async show () {

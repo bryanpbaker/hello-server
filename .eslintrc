@@ -5,7 +5,7 @@
   "parserOptions": {
     "ecmaVersion": 2017
   },
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "extends": ["airbnb-base"],
   "rules": {
     "strict": "off",
     "semi": ["error", "never"],

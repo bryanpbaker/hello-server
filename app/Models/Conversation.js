@@ -3,11 +3,11 @@
 const Model = use('Model')
 
 class Conversation extends Model {
-  users() {
+  users () {
     return this.belongsToMany('App/Models/Conversation')
   }
 
-  messages() {
+  messages () {
     return this.hasMany('App/Models/Message')
   }
 }
