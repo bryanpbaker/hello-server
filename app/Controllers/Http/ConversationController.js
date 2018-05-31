@@ -1,5 +1,3 @@
-'use strict';
-
 const Conversation = use('App/Models/Conversation');
 
 class ConversationController {
@@ -7,6 +5,8 @@ class ConversationController {
 
   async store() {
     const conversation = await Conversation.create();
+
+    return conversation;
   }
 
   async show() {}

@@ -1,14 +1,12 @@
-'use strict';
-
 const Model = use('Model');
 
 class Conversation extends Model {
   users() {
-    return this.belongsToMany('App/Models/Conversation');
+    return this.belongsToMany('App/Models/User').withTimestamps();
   }
 
   messages() {
-    return this.hasMany('App/Models/Message');
+    return this.hasMany('App/Models/Message').withTimestamps();
   }
 }
 

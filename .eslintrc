@@ -7,15 +7,7 @@
   },
   "extends": ["airbnb-base", "plugin:prettier/recommended"],
   "rules": {
-    "strict": "off",
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "comma-dangle": ["error", "never"],
     "class-methods-use-this": "off",
-    "object-curly-newline": ["error", { "multiline": true }],
-    "global-require": "off",
-    "arrow-parens": ["error", "as-needed"],
-    "no-param-reassign": ["error", { "props": false }],
     "prettier/prettier": ["error", { "singleQuote": true }]
   },
   "globals": {

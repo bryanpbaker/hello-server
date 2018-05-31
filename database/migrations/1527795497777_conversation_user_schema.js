@@ -1,17 +1,16 @@
-'use strict';
-
 const Schema = use('Schema');
 
 class ConversationUserSchema extends Schema {
   up() {
-    this.create('conversation_users', table => {
-      table.increments();
+    this.table('conversation_user', table => {
       table.timestamps();
     });
   }
 
   down() {
-    this.drop('conversation_users');
+    this.table('conversation_user', table => {
+      // reverse alternations
+    });
   }
 }
 

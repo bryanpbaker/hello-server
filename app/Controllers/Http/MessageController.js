@@ -1,8 +1,7 @@
-'use strict';
-
-const Conversation = use('App/Models/Conversation');
-const ConversationUser = use('App/Models/ConversationUser');
+const Db = use('Database');
+const User = use('App/Models/User');
 const Message = use('App/Models/Message');
+const Conversation = use('App/Models/Conversation');
 
 class MessageController {
   async index() {}
@@ -10,20 +9,15 @@ class MessageController {
   async create() {}
 
   async store({ request, auth }) {
-    const data = request.all();
+    const { recipientId, message } = request.body;
     const userId = auth.user.id;
+    const conversation = new Conversation();
+    const user1 = await User.find(userId);
+    const user2 = await User.find(recipientId);
 
-    // TODO - findOrCreate conversation between sender and recipient
-    // const conversation = await Conversation.find(2)
-    const conversation = await ConversationUser.findOrCreate();
+    await conversation.users().saveMany([user1, user2]);
 
-    // const messages = await conversation.messages().create({
-    //   user_id: userId,
-    //   conversation_id: conversation.id,
-    //   body: data.body
-    // })
-
-    // return messages
+    return 'Success!';
   }
 
   async show() {}

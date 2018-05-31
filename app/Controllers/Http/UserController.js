@@ -1,6 +1,4 @@
-"use strict";
-
-const User = use("App/Models/User");
+const User = use('App/Models/User');
 
 class UserController {
   /**
@@ -46,7 +44,11 @@ class UserController {
       return "You cannot see someone else's profile";
     }
 
-    return auth.user;
+    return {
+      success: true,
+      id: auth.user.id,
+      email: auth.user.email
+    };
   }
 
   /**

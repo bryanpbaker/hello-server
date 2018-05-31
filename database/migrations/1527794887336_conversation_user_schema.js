@@ -1,0 +1,18 @@
+const Schema = use('Schema');
+
+class ConversationUserSchema extends Schema {
+  up() {
+    this.table('conversation_user', table => {
+      table.dateTime('created_at').notNullable();
+      table.dateTime('updated_at').notNullable();
+    });
+  }
+
+  down() {
+    this.table('conversation_users', table => {
+      // reverse alternations
+    });
+  }
+}
+
+module.exports = ConversationUserSchema;

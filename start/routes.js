@@ -1,5 +1,3 @@
-'use strict'
-
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -13,19 +11,22 @@
 |
 */
 
-const Route = use('Route')
+const Route = use('Route');
 
-Route.get('/', ({ request }) => ({ greeting: 'Hello world in JSON' }))
+Route.get('/', ({ request }) => ({ greeting: 'Hello world in JSON' }));
 
-// User
-Route.post('users', 'UserController.store')
-Route.post('login', 'UserController.login')
-Route.get('users/:id', 'UserController.show').middleware('auth')
-Route.patch('users/:id', 'UserController.update').middleware('auth')
-Route.delete('users/:id', 'UserController.destroy').middleware('auth')
+// prefix all routes with 'api/v1'
+Route.group(() => {
+  // User
+  Route.post('users', 'UserController.store');
+  Route.post('login', 'UserController.login');
+  Route.get('users/:id', 'UserController.show').middleware('auth');
+  Route.patch('users/:id', 'UserController.update').middleware('auth');
+  Route.delete('users/:id', 'UserController.destroy').middleware('auth');
 
-// Conversation
-Route.post('conversations', 'ConversationController.store')
+  // Conversation
+  Route.post('conversations', 'ConversationController.store');
 
-// Message
-Route.post('messages', 'MessageController.store').middleware('auth')
+  // Message
+  Route.post('messages', 'MessageController.store').middleware('auth');
+}).prefix('api/v1');
