@@ -1,18 +1,18 @@
-'use strict'
+'use strict';
 
-const Schema = use('Schema')
+const Schema = use('Schema');
 
 class ConversationSchema extends Schema {
-  up () {
-    this.create('conversations', (table) => {
-      table.increments()
-      table.timestamps()
-    })
+  up() {
+    this.create('conversations', table => {
+      table.increments();
+      table.timestamps();
+    });
   }
 
-  down () {
-    this.drop('conversations')
+  down() {
+    this.drop('conversations');
   }
 }
 
-module.exports = ConversationSchema
+module.exports = ConversationSchema;

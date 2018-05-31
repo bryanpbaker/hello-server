@@ -1,26 +1,21 @@
-'use strict'
+'use strict';
 
-const Conversation = use('App/Models/Conversation')
+const Conversation = use('App/Models/Conversation');
 
 class ConversationController {
-  async index () {
+  async index() {}
+
+  async store() {
+    const conversation = await Conversation.create();
   }
 
-  async store () {
-    const conversation = await Conversation.create()
-  }
+  async show() {}
 
-  async show () {
-  }
+  async edit() {}
 
-  async edit () {
-  }
+  async update() {}
 
-  async update () {
-  }
-
-  async destroy () {
-  }
+  async destroy() {}
 }
 
-module.exports = ConversationController
+module.exports = ConversationController;

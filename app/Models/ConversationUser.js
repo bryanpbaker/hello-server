@@ -1,8 +1,7 @@
-'use strict'
+'use strict';
 
-const Model = use('Model')
+const Model = use('Model');
 
-class ConversationUser extends Model {
-}
+class ConversationUser extends Model {}
 
-module.exports = ConversationUser
+module.exports = ConversationUser;

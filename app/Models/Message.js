@@ -1,8 +1,7 @@
-'use strict'
+'use strict';
 
-const Model = use('Model')
+const Model = use('Model');
 
-class Message extends Model {
-}
+class Message extends Model {}
 
-module.exports = Message
+module.exports = Message;

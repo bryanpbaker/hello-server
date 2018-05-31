@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
-const Model = use('Model')
+const Model = use('Model');
 
 class Conversation extends Model {
-  users () {
-    return this.belongsToMany('App/Models/Conversation')
+  users() {
+    return this.belongsToMany('App/Models/Conversation');
   }
 
-  messages () {
-    return this.hasMany('App/Models/Message')
+  messages() {
+    return this.hasMany('App/Models/Message');
   }
 }
 
-module.exports = Conversation
+module.exports = Conversation;
