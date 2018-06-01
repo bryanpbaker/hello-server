@@ -11,13 +11,33 @@ class MessageController {
   async store({ request, auth }) {
     const { recipientId, message } = request.body;
     const userId = auth.user.id;
-    const conversation = new Conversation();
-    const user1 = await User.find(userId);
-    const user2 = await User.find(recipientId);
 
-    await conversation.users().saveMany([user1, user2]);
+    // TODO DEFINE USER AND RECIPIENT
+    const recipient = await User.find(recipientId);
+    const user = await User.find(userId);
 
-    return 'Success!';
+    // TODO: check if conversation exists
+    let recipientConversations = await recipient
+      .conversations()
+      .whereInPivot('user_id', [recipientId])
+      .fetch();
+    recipientConversations = recipientConversations.rows.map(
+      convo => convo.$attributes.id
+    );
+    const userConversations = await user
+      .conversations()
+      .whereInPivot('conversation_id', recipientConversations)
+      .fetch();
+
+    return userConversations;
+
+    // const conversation = new Conversation();
+    // const user1 = await User.find(userId);
+    // const user2 = await User.find(recipientId);
+
+    // await conversation.users().saveMany([user1, user2]);
+
+    // return 'Success!';
   }
 
   async show() {}

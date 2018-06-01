@@ -7,6 +7,7 @@ class UserController {
    * @param {Object} Context (destructure request and response)
    */
   async store({ request }) {
+    // TODO: make fields case insensitive
     const { body } = request;
     const user = await User.findOrCreate({ email: body.email }, body);
     const {
@@ -64,7 +65,6 @@ class UserController {
 
     user.username = body.username;
     user.email = body.email;
-    user.password = body.password;
 
     user.save();
 
