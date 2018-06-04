@@ -25,7 +25,9 @@ Route.group(() => {
   Route.delete('users/:id', 'UserController.destroy').middleware('auth');
 
   // Conversation
-  Route.post('conversations', 'ConversationController.store');
+  Route.post('conversations', 'ConversationController.store')
+    .middleware('auth')
+    .middleware('FindConversation');
 
   // Message
   Route.post('messages', 'MessageController.store')

@@ -1,5 +1,4 @@
 const Database = use('Database');
-const User = use('App/Models/User');
 
 class FindConversation {
   async handle({ request, auth }, next) {
@@ -17,16 +16,16 @@ class FindConversation {
     );
     // query the conversation_user pivot table to see if the recipient
     // shares a common conversation with the user
-    const conversation = await Database.table('conversation_user')
+    const matchingRows = await Database.table('conversation_user')
       .whereIn('conversation_id', userConversationIds)
       .where('user_id', recipientId);
 
-    // set request.conversation equal to the conversation
+    // set request.conversationUserMatch equal to the matchingRows
     // if it exists, or null if not
-    if (conversation.length > 0) {
-      request.conversation = conversation;
+    if (matchingRows.length > 0) {
+      request.conversationUserMatch = matchingRows;
     } else {
-      request.conversation = null;
+      request.conversationUserMatch = null;
     }
     // call next to advance the request
     await next();

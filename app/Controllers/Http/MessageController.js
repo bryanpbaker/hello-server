@@ -9,19 +9,31 @@ class MessageController {
   async create() {}
 
   async store({ request, auth }) {
-    if (!request.conversation) {
-      console.log('no way man');
-    } else {
-      console.log('alright here you go');
+    const userId = auth.user.id;
+    const { recipientId } = request.body;
+
+    if (!request.conversationUserMatch) {
+      // instantiate new Conversation and assign the users to it
+      const conversation = new Conversation();
+      const user = await User.find(userId);
+      const recipient = await User.find(recipientId);
+
+      await conversation.users().saveMany([user, recipient]);
+
+      return {
+        success: true,
+        conversation
+      };
     }
 
-    // instantiate new Conversation if one does not yet exist
-    // between the two users
-    // const conversation = new Conversation();
-    // const user1 = await User.find(userId);
-    // const user2 = await User.find(recipientId);
-    // await conversation.users().saveMany([user1, user2]);
-    // return 'Success!';
+    // find the existing conversation
+    const conversationId = request.conversationUserMatch[0].conversation_id;
+    const conversation = await Conversation.find(conversationId);
+
+    return {
+      success: true,
+      conversation
+    };
   }
 
   async show() {}

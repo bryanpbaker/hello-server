@@ -3,10 +3,8 @@ const Conversation = use('App/Models/Conversation');
 class ConversationController {
   async index() {}
 
-  async store() {
-    const conversation = await Conversation.create();
-
-    return conversation;
+  async store({ request, auth }) {
+    return request.conversationUserMatch;
   }
 
   async show() {}
