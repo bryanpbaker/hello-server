@@ -1,6 +1,4 @@
-'use strict'
-
-const Server = use('Server')
+const Server = use('Server');
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +12,7 @@ const Server = use('Server')
 const globalMiddleware = [
   'Adonis/Middleware/BodyParser',
   'Adonis/Middleware/AuthInit'
-]
+];
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +33,8 @@ const globalMiddleware = [
 */
 const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
-}
+  FindConversation: 'App/Middleware/FindConversation'
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -47,12 +46,8 @@ const namedMiddleware = {
 | control over request lifecycle.
 |
 */
-const serverMiddleware = [
-  'Adonis/Middleware/Static',
-  'Adonis/Middleware/Cors'
-]
+const serverMiddleware = ['Adonis/Middleware/Static', 'Adonis/Middleware/Cors'];
 
-Server
-  .registerGlobal(globalMiddleware)
+Server.registerGlobal(globalMiddleware)
   .registerNamed(namedMiddleware)
-  .use(serverMiddleware)
+  .use(serverMiddleware);

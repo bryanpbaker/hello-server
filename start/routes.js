@@ -28,5 +28,7 @@ Route.group(() => {
   Route.post('conversations', 'ConversationController.store');
 
   // Message
-  Route.post('messages', 'MessageController.store').middleware('auth');
+  Route.post('messages', 'MessageController.store')
+    .middleware('auth')
+    .middleware('FindConversation');
 }).prefix('api/v1');
