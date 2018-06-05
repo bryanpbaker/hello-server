@@ -2,8 +2,10 @@ const Message = use('App/Models/Message');
 const Conversation = use('App/Models/Conversation');
 
 class MessageController {
-  async index() {}
-
+  /**
+   * create a new message and add it to the appropriate conversation
+   * @param {Object} context
+   */
   async store({ request, auth }) {
     const { conversationId, message } = request.all();
     const conversation = await Conversation.find(conversationId);
@@ -16,6 +18,10 @@ class MessageController {
     return 'Message has been created!';
   }
 
+  /**
+   * delete a message
+   * @param {Object} context
+   */
   async destroy({ request }) {
     const message = await Message.find(request.params.id);
 

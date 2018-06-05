@@ -36,11 +36,13 @@ class ConversationController {
     // find the existing conversation
     const conversationId = request.conversationUserMatch[0].conversation_id;
     const conversation = await Conversation.find(conversationId);
+    const messages = await conversation.messages().fetch();
 
     return {
       success: true,
       message: 'This conversation already existed',
-      conversation
+      conversation,
+      messages
     };
   }
 
@@ -49,7 +51,14 @@ class ConversationController {
    * @param {integer} conversationId
    */
   async show({ request }) {
-    return Conversation.find(request.params.id);
+    const conversation = await Conversation.find(request.params.id);
+    const messages = await conversation.messages().fetch();
+
+    return {
+      success: true,
+      conversation,
+      messages
+    };
   }
 
   /**
