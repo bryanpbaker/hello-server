@@ -39,4 +39,5 @@ Route.group(() => {
 
   // Messages
   Route.post('messages', 'MessageController.store').middleware('auth');
+  Route.delete('messages/:id', 'MessageController.destroy').middleware('auth');
 }).prefix('api/v1');

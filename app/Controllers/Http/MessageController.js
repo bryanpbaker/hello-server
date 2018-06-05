@@ -1,5 +1,3 @@
-const Db = use('Database');
-const User = use('App/Models/User');
 const Message = use('App/Models/Message');
 const Conversation = use('App/Models/Conversation');
 
@@ -9,7 +7,7 @@ class MessageController {
   async store({ request, auth }) {
     const { conversationId, message } = request.all();
     const conversation = await Conversation.find(conversationId);
-    const newMessage = await conversation.messages().create({
+    await conversation.messages().create({
       user_id: auth.user.id,
       conversation_id: conversation.id,
       body: message
@@ -18,13 +16,13 @@ class MessageController {
     return 'Message has been created!';
   }
 
-  async show() {}
+  async destroy({ request }) {
+    const message = await Message.find(request.params.id);
 
-  async edit() {}
+    await message.delete();
 
-  async update() {}
-
-  async destroy() {}
+    return 'Message has been deleted';
+  }
 }
 
 module.exports = MessageController;
