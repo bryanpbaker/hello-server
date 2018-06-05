@@ -7,9 +7,15 @@ class UserController {
    * @param {Object} Context (destructure request and response)
    */
   async store({ request }) {
-    // TODO: make fields case insensitive
     const { body } = request;
-    const user = await User.findOrCreate({ email: body.email }, body);
+    const user = await User.findOrCreate(
+      { email: body.email.toLowerCase() },
+      {
+        email: body.email.toLowerCase(),
+        username: body.username.toLowerCase(),
+        password: request.body.password
+      }
+    );
     const {
       $attributes: { username, email }
     } = user;
@@ -42,7 +48,7 @@ class UserController {
    */
   async show({ auth, params }) {
     if (auth.user.id !== Number(params.id)) {
-      return "You cannot see someone else's profile";
+      return 'You are not authorized';
     }
 
     return {
