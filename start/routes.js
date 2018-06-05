@@ -25,12 +25,20 @@ Route.group(() => {
   Route.delete('users/:id', 'UserController.destroy').middleware('auth');
 
   // Conversation
-  Route.post('conversations', 'ConversationController.store')
+  Route.get('conversations', 'ConversationController.index').middleware('auth');
+  Route.post('conversations', 'ConversationController.findOrStore')
     .middleware('auth')
-    .middleware('FindConversation');
+    .middleware('MatchConversations');
+  Route.get('conversations/:id', 'ConversationController.show').middleware(
+    'auth'
+  );
+  Route.delete(
+    'conversations/:id',
+    'ConversationController.destroy'
+  ).middleware('auth');
 
   // Message
   Route.post('messages', 'MessageController.store')
     .middleware('auth')
-    .middleware('FindConversation');
+    .middleware('MatchConversations');
 }).prefix('api/v1');

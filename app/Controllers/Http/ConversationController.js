@@ -1,19 +1,68 @@
 const Conversation = use('App/Models/Conversation');
+const User = use('App/Models/User');
 
 class ConversationController {
-  async index() {}
+  /**
+   * find an authenticated user and returns all of
+   * that user's conversations
+   * @param {Object} Context - destructured { auth } prop
+   */
+  async index({ auth }) {
+    const user = await User.find(auth.user.id);
 
-  async store({ request, auth }) {
-    return request.conversationUserMatch;
+    return user.conversations().fetch();
   }
 
-  async show() {}
+  /**
+   * create a conversation between two users if one does not already exist
+   * @param {Object} Context - destructured { request, auth } props
+   */
+  async findOrStore({ request, auth }) {
+    if (!request.conversationUserMatch) {
+      // instantiate new Conversation and assign the users to it
+      const conversation = new Conversation();
+      const user = await User.find(auth.user.id);
+      const recipient = await User.find(request.body.recipientId);
 
-  async edit() {}
+      await conversation.users().saveMany([user, recipient]);
 
-  async update() {}
+      return {
+        success: true,
+        message: 'A new conversation has been created',
+        conversation
+      };
+    }
 
-  async destroy() {}
+    // find the existing conversation
+    const conversationId = request.conversationUserMatch[0].conversation_id;
+    const conversation = await Conversation.find(conversationId);
+
+    return {
+      success: true,
+      message: 'This conversation already existed',
+      conversation
+    };
+  }
+
+  /**
+   * find and return a conversation with the given id
+   * @param {integer} conversationId
+   */
+  async show({ request }) {
+    return Conversation.find(request.params.id);
+  }
+
+  /**
+   * delete a conversation from the database
+   * @param {Object} Context
+   */
+  async destroy({ request }) {
+    const conversation = await Conversation.find(request.params.id);
+
+    await conversation.delete();
+
+    return `Conversation with id:${conversation.id} has been deleted.`;
+  }
 }
 
 module.exports = ConversationController;

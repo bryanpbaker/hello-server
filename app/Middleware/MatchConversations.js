@@ -1,6 +1,6 @@
 const Database = use('Database');
 
-class FindConversation {
+class MatchConversations {
   async handle({ request, auth }, next) {
     const userId = auth.user.id;
     const { recipientId } = request.body;
@@ -32,4 +32,4 @@ class FindConversation {
   }
 }
 
-module.exports = FindConversation;
+module.exports = MatchConversations;

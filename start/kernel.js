@@ -33,7 +33,7 @@ const globalMiddleware = [
 */
 const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
-  FindConversation: 'App/Middleware/FindConversation'
+  MatchConversations: 'App/Middleware/MatchConversations'
 };
 
 /*
