@@ -13,7 +13,7 @@
 
 const Route = use('Route');
 
-Route.get('/', ({ request }) => ({ greeting: 'Hello App server is running' }));
+Route.get('/', () => ({ greeting: 'Hello App server is running' }));
 
 // prefix all routes with 'api/v1'
 Route.group(() => {
