@@ -13,18 +13,18 @@
 
 const Route = use('Route');
 
-Route.get('/', ({ request }) => ({ greeting: 'Hello world in JSON' }));
+Route.get('/', ({ request }) => ({ greeting: 'Hello App server is running' }));
 
 // prefix all routes with 'api/v1'
 Route.group(() => {
-  // User
+  // Users
   Route.post('users', 'UserController.store');
   Route.post('login', 'UserController.login');
   Route.get('users/:id', 'UserController.show').middleware('auth');
   Route.patch('users/:id', 'UserController.update').middleware('auth');
   Route.delete('users/:id', 'UserController.destroy').middleware('auth');
 
-  // Conversation
+  // Conversations
   Route.get('conversations', 'ConversationController.index').middleware('auth');
   Route.post('conversations', 'ConversationController.findOrStore')
     .middleware('auth')
@@ -37,8 +37,6 @@ Route.group(() => {
     'ConversationController.destroy'
   ).middleware('auth');
 
-  // Message
-  Route.post('messages', 'MessageController.store')
-    .middleware('auth')
-    .middleware('MatchConversations');
+  // Messages
+  Route.post('messages', 'MessageController.store').middleware('auth');
 }).prefix('api/v1');

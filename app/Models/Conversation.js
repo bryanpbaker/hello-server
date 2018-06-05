@@ -6,7 +6,7 @@ class Conversation extends Model {
   }
 
   messages() {
-    return this.hasMany('App/Models/Message').withTimestamps();
+    return this.hasMany('App/Models/Message');
   }
 }
 

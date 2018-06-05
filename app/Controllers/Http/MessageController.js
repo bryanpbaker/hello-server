@@ -6,9 +6,17 @@ const Conversation = use('App/Models/Conversation');
 class MessageController {
   async index() {}
 
-  async create() {}
+  async store({ request, auth }) {
+    const { conversationId, message } = request.all();
+    const conversation = await Conversation.find(conversationId);
+    const newMessage = await conversation.messages().create({
+      user_id: auth.user.id,
+      conversation_id: conversation.id,
+      body: message
+    });
 
-  async store() {}
+    return 'Message has been created!';
+  }
 
   async show() {}
 
