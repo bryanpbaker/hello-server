@@ -17,6 +17,7 @@
   "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.1",
+    "@adonisjs/ally": "^2.0.3",
     "@adonisjs/auth": "^3.0.4",
     "@adonisjs/bodyparser": "^2.0.2",
     "@adonisjs/cors": "^1.0.5",
