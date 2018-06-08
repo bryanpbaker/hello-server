@@ -24,6 +24,10 @@ Route.group(() => {
   Route.patch('users/:id', 'UserController.update').middleware('auth');
   Route.delete('users/:id', 'UserController.destroy').middleware('auth');
 
+  // Facebook Auth
+  Route.get('login/facebook', 'LoginController.redirect');
+  Route.get('facebook/callback', 'LoginController.callback');
+
   // Conversations
   Route.get('conversations', 'ConversationController.index').middleware('auth');
   Route.post('conversations', 'ConversationController.findOrStore')
