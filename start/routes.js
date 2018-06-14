@@ -25,8 +25,7 @@ Route.group(() => {
   Route.delete('users/:id', 'UserController.destroy').middleware('auth');
 
   // Facebook Auth
-  Route.get('login/facebook', 'LoginController.redirect');
-  Route.get('facebook/callback', 'LoginController.callback');
+  Route.post('login/facebook', 'LoginController.verifyFbToken');
 
   // Conversations
   Route.get('conversations', 'ConversationController.index').middleware('auth');
